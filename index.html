@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mass Points Academy</title>
+<meta name="theme-color" content="#6D28D9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Mass Points">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+
+<style>
+:root{--p:#6D28D9;--b:#4F7DF3;--k:#DB4BA7;--g:#22C55E;--bg:#F5F7FC;--ink:#1F2937}
+[hidden]{display:none!important}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(90deg,var(--p),var(--k));color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+header h1{margin:0;font-size:22px}header p{margin:2px 0 0;font-size:13px;opacity:.9}
+.stats{display:flex;gap:8px}.stats div{background:rgba(255,255,255,.2);border-radius:12px;padding:4px 12px;text-align:center;font-size:11px}.stats b{display:block;font-size:17px}
+nav{max-width:1500px;margin:10px auto 0;padding:0 12px;display:flex;gap:8px;flex-wrap:wrap}
+nav button{background:#fff;border:1px solid #cbd5e1}nav button.on{background:var(--p);color:#fff;border-color:var(--p)}
+main,.wrap{max-width:1500px;margin:auto;padding:12px}
+main{display:grid;gap:12px;grid-template-columns:23% 1fr 23%}
+@media(max-width:1000px){main{grid-template-columns:1fr}#mid{order:-1}}
+.card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 4px 20px rgba(109,40,217,.08);margin-bottom:12px}
+.card h3{margin:0 0 8px;font-size:15px}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:10px 12px;min-height:42px;font-weight:600}
+button:disabled{opacity:.45;cursor:not-allowed}
+.help button{display:block;width:100%;text-align:left;background:var(--bg);margin-bottom:6px}
+.lv button{display:block;width:100%;margin-bottom:6px;color:#fff}
+.bar{height:10px;background:#e2e8f0;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--p),var(--k))}
+.tags span{display:inline-block;background:#ede9fe;color:var(--p);border-radius:99px;padding:2px 10px;font-size:12px;font-weight:600;margin:0 4px 4px 0}
+svg#cv{width:100%;touch-action:none;user-select:none;border:1px solid #e2e8f0;border-radius:12px;background:#fff}
+.tg{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.tg button{background:#fff;border:1px solid #cbd5e1}.tg button.on{background:var(--p);color:#fff}
+input,select{font:inherit;padding:10px;border:1px solid #cbd5e1;border-radius:12px;min-height:42px;background:#fff}input{flex:1;min-width:140px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.ok{background:#dcfce7;color:#166534}.bad{background:#fee2e2;color:#991b1b}
+.msg{padding:10px;border-radius:12px;margin-top:8px;font-size:14px}
+.f{display:inline-block;vertical-align:middle;text-align:center;font-size:.85em;margin:0 2px}.f i{display:block;font-style:normal;padding:0 3px}.f i:first-child{border-bottom:1px solid currentColor}
+.an{background:#eff6ff;border-radius:12px;padding:10px;font-size:14px}.an div{display:flex;justify-content:space-between;gap:8px;padding:3px 0}
+.st{background:#f5f3ff;border-radius:12px;padding:8px 10px;margin-top:6px;font-size:14px}.st b{color:var(--p)}
+.warn{background:#fef9c3;border-radius:12px;padding:8px;font-size:12px;margin-top:8px}
+.th{line-height:1.6;font-size:15px}.th h3{color:var(--p);font-size:17px}.th .fm{background:#f5f3ff;border-radius:10px;padding:8px 12px;margin:6px 0;font-size:16px}.th small{color:#64748b}
+.pc{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid #e2e8f0;border-radius:12px;padding:10px;margin-bottom:8px;flex-wrap:wrap}
+.pc button{background:var(--p);color:#fff}
+
+/* iPad and touch-friendly responsive layout */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{overflow-x:hidden}button,input,select{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+@media (pointer:coarse){button{min-height:46px}nav button{min-height:48px}}
+@media (min-width:700px) and (max-width:1180px){main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}#mid{grid-column:1/-1;grid-row:1}main>aside{min-width:0}}
+@media (max-width:699px){header{align-items:flex-start}header h1{font-size:19px}.stats{width:100%;justify-content:space-between}.stats div{flex:1}nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;padding:0 8px}nav button{font-size:12px;padding:8px 4px}main,.wrap{padding:8px}main{display:flex;flex-direction:column}#mid{order:0}main>aside{order:1}.card{padding:11px}#cv{max-height:65vh}input{min-width:0;width:100%}.row button{flex:1}}
+@supports (padding: env(safe-area-inset-left)){body{padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}}
+</style>
+</head>
+<body>
+<header>
+ <div style="display:flex;gap:10px;align-items:center">
+  <svg viewBox="0 0 48 48" style="width:40px"><polygon points="24,6 6,40 42,40" fill="rgba(255,255,255,.2)" stroke="#fff" stroke-width="2.5"/><circle cx="24" cy="6" r="5" fill="#FACC15"/><circle cx="6" cy="40" r="7" fill="#fff"/><circle cx="42" cy="40" r="4" fill="#4F7DF3"/></svg>
+  <div><h1>Mass Points Academy</h1><p>«Олимпиадалық геометрияны интерактивті түрде үйрен!»</p></div>
+ </div>
+ <div class="stats"><div>Оқушы деңгейі<b id="hLv">1</b></div><div>Жинаған ұпайы<b id="hXp">0</b></div><div>Қатарынан күн<b id="hSt">0</b></div></div>
+</header>
+<nav aria-label="Бөлімдер"><button data-v="solve" class="on">🏠 Есеп шешу</button><button data-v="theory">📖 Теория</button><button data-v="lib">📚 Есептер жинағы</button></nav>
+
+<main id="vSolve">
+ <aside>
+  <div class="card"><h3>🏆 Менің жетістігім</h3>
+   <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600"><span id="lvTxt"></span><span id="xpTxt"></span></div>
+   <div class="bar" style="margin:6px 0"><i id="xpBar"></i></div>
+   <div style="font-size:13px">Шешілген: <b id="sSolved">0</b> · Дұрыс жауап: <b id="sOk">0</b></div></div>
+  <div class="card help"><h3>🧰 Көмек құралдары</h3>
+   <button id="bHint">💡 Кеңес алу</button><button id="bMass">👁 Массаларды көрсету</button>
+   <button id="bStep">⏭ Шешімнің келесі қадамы</button><button id="bReset2">↺ Сызбаны қалпына келтіру</button></div>
+ </aside>
+ <section id="mid">
+  <div class="card"><h2 id="pTitle" style="margin:0 0 6px"></h2><div class="tags" id="pTags"></div><p id="pText" style="line-height:1.5"></p></div>
+  <div class="card">
+   <svg id="cv" viewBox="0 0 800 520"></svg>
+   <p style="font-size:12px;color:#64748b;margin:6px 0 0">Қызыл нүктелерді сүйреңіз: D, E, F нүктелері берілген қатынас бойынша қабырғада қалады.</p>
+   <div class="tg"><button id="tMass">Массаларды көрсету</button><button id="tRat" class="on">Қатынастарды көрсету</button><button id="bReset">Бастапқы күйге келтіру</button><button id="bSave">Сызбаны сақтау</button></div>
+  </div>
+  <div class="card"><h3 id="ansH">Жауап: <span id="ask"></span> = ?</h3><div id="proofBox" hidden><p style="font-size:14px;color:#475569">Дәлелдеу есебі: жауап енгізілмейді. «Шешімнің келесі қадамы» батырмасымен дәлелдеуді қадам-қадам ашыңыз.</p><button id="bSelf" style="background:var(--g);color:#fff">✅ Өзім дәлелдедім</button><p style="font-size:12px;color:#64748b">XP өзін-өзі бағалау бойынша беріледі және дәлдік статистикасына кірмейді.</p></div>
+   <div class="row" id="ansRow"><input id="ans" placeholder="Мысалы: 5:1 немесе 14/15" aria-label="Жауап"><button id="bCheck" style="background:var(--g);color:#fff">✓ Тексеру</button></div>
+   <div id="fb"></div><div id="hints"></div><div id="steps"></div></div>
+ </section>
+ <aside>
+  <div class="card"><h3>📊 Математикалық талдау</h3><div class="an" id="an"></div><div id="warn"></div></div>
+  <div class="card lv"><h3>🎯 Есеп деңгейлері</h3>
+   <button data-d="easy" style="background:linear-gradient(90deg,#4ade80,#22c55e)">Жеңіл</button>
+   <button data-d="medium" style="background:linear-gradient(90deg,#facc15,#fb923c)">Орташа</button>
+   <button data-d="hard" style="background:linear-gradient(90deg,#f87171,#ec4899)">Күрделі</button>
+   <button data-d="olympiad" style="background:linear-gradient(90deg,#a855f7,#6366f1)">Олимпиадалық</button>
+   <button id="bRand" style="background:linear-gradient(90deg,var(--p),var(--b))">🎲 Кездейсоқ есеп</button></div>
+  <div class="card"><h3>🏅 Жетістіктер</h3><div style="font-size:14px">Дәлдік: <b id="acc">әлі жауап жоқ</b><br>Әрекет: <b id="att">0</b></div></div>
+ </aside>
+</main>
+
+<div class="wrap th" id="vTheory" hidden></div>
+<div class="wrap" id="vLib" hidden>
+ <div class="card"><h2 style="margin:0 0 10px">Олимпиадалық есептер жинағы</h2>
+  <div class="row"><select id="fD" aria-label="Деңгей"></select><select id="fT" aria-label="Тақырып"></select><select id="fS" aria-label="Күйі"><option value="">Барлығы</option><option value="1">Шешілген</option><option value="0">Шешілмеген</option></select></div>
+  <p style="font-size:13px;color:#64748b">«Автор жасаған» белгісі бар есептер — өзім жасаған жаттығулар. Прасолов есептерінің нөмірін пайдаланушы берді, мен оларды кітаптан тексермедім.</p>
+  <div id="list"></div></div>
+</div>
+
+<script>
+'use strict';
+/* ===== 1. ДӘЛ БӨЛШЕКТЕР ===== */
+const gcd=(a,b)=>{a=a<0n?-a:a;b=b<0n?-b:b;while(b)[a,b]=[b,a%b];return a};
+const lcm=(a,b)=>a/gcd(a,b)*b;
+const F=(n,d=1n)=>{n=BigInt(n);d=BigInt(d);if(d===0n)throw Error('0');if(d<0n){n=-n;d=-d}const g=gcd(n,d)||1n;return{n:n/g,d:d/g}};
+const mul=(a,b)=>F(a.n*b.n,a.d*b.d),div=(a,b)=>F(a.n*b.d,a.d*b.n),eq=(a,b)=>a.n===b.n&&a.d===b.d;
+const fs=f=>f.d===1n?`${f.n}`:`<span class="f"><i>${f.n}</i><i>${f.d}</i></span>`;
+function parseNum(s){s=s.trim().replace(',','.').replace(/\s+/g,'');let m=/^([+-]?\d+)\/([+-]?\d+)$/.exec(s);
+ if(m)return BigInt(m[2])===0n?null:F(m[1],m[2]);
+ m=/^([+-]?)(\d+)(?:\.(\d+))?$/.exec(s);if(!m)return null;const fr=m[3]||'';const n=BigInt(m[2]+fr);return F(m[1]==='-'?-n:n,10n**BigInt(fr.length))}
+function parseRatio(s){s=s.trim().replace(/\s+/g,'');if(s.includes(':')){const p=s.split(':');if(p.length!==2)return null;const a=parseNum(p[0]),b=parseNum(p[1]);return a&&b&&b.n!==0n?div(a,b):null}return parseNum(s)}
+
+/* ===== 2. MASS POINTS ҚОЗҒАЛТҚЫШЫ =====
+   D∈BC: BD:DC=p:q ⇒ m(B):m(C)=q:p;  E∈CA: CE:EA;  F∈AB: AF:FB. Кез келген екі (немесе үш) чевиан беріледі. */
+function analyze(g){
+ const S=[['bd','B','C','BD','DC'],['ce','C','A','CE','EA'],['af','A','B','AF','FB']],E=[],steps=[];
+ for(const [k,X,Y,a,b] of S){const r=g[k];if(!r)continue;
+  if(r[0]<=0||r[1]<=0)return{ok:false,steps,warn:['Нүкте қабырғаның ішінде жатпайды: оң массалар жеткіліксіз.']};
+  E.push([X,Y,F(r[1],r[0])]);steps.push(`${a}:${b} = ${r[0]}:${r[1]} ⇒ m(${X}):m(${Y}) = ${r[1]}:${r[0]}`)}
+ if(E.length<2)return{ok:false,steps,warn:['Кемінде екі чевиан қажет: қиылысу нүктесіндегі қатынасты табуға деректер жеткіліксіз.']};
+ const v={};v[E[0][0]]=F(1);
+ for(let it=0;it<3;it++)for(const [X,Y,r] of E){if(v[X]&&!v[Y])v[Y]=div(v[X],r);else if(v[Y]&&!v[X])v[X]=mul(v[Y],r)}
+ for(const [X,Y,r] of E)if(!eq(div(v[X],v[Y]),r))return{ok:false,steps,warn:['Қайшылық: чевиандар бір нүктеде қиылыспайды (Чева шарты орындалмайды).']};
+ const L=['A','B','C'].reduce((a,k)=>lcm(a,v[k].d),1n);let w=['A','B','C'].map(k=>v[k].n*L/v[k].d);const G=w.reduce(gcd,0n);w=w.map(x=>x/G);
+ const [A,B,C]=w,m={A:+A.toString(),B:+B.toString(),C:+C.toString()};
+ steps.push(`Ортақ төбелер бойынша массаларды келістіреміз: m(A)=${A}, m(B)=${B}, m(C)=${C}`);
+ const r={ok:true,m,warn:[],mD:m.B+m.C,mE:m.C+m.A,mF:m.A+m.B,AP_PD:F(B+C,A),BP_PE:F(C+A,B),CP_PF:F(A+B,C),BD_DC:F(C,B),CE_EA:F(A,C),AF_FB:F(B,A)};
+ r.steps=steps;return r}
+const AO={PBC:'A',PCA:'B',PAB:'C'};
+function value(res,a){if(typeof a==='object'){const s=res.m.A+res.m.B+res.m.C;return F(BigInt(a.S)*BigInt(res.m[AO[a.t]]),BigInt(s))}return res[a]}
+function askStep(res,a){const m=res.m,s=m.A+m.B+m.C;
+ if(typeof a==='object')return`P — массалар центрі. [${a.t}]:[ABC] = m(${AO[a.t]}):(m(A)+m(B)+m(C)) = ${m[AO[a.t]]}:${s}, сондықтан [${a.t}] = ${a.S}·${m[AO[a.t]]}/${s} = ${fs(value(res,a))}`;
+ return{AP_PD:`m(D)=m(B)+m(C)=${res.mD}; AP:PD = m(D):m(A) = ${res.mD}:${m.A} = ${fs(res.AP_PD)}`,BP_PE:`m(E)=m(C)+m(A)=${res.mE}; BP:PE = m(E):m(B) = ${res.mE}:${m.B} = ${fs(res.BP_PE)}`,
+  CP_PF:`m(F)=m(A)+m(B)=${res.mF}; CP:PF = m(F):m(C) = ${res.mF}:${m.C} = ${fs(res.CP_PF)}`,AF_FB:`AF:FB = m(B):m(A) = ${m.B}:${m.A} = ${fs(res.AF_FB)}`,
+  BD_DC:`BD:DC = m(C):m(B) = ${m.C}:${m.B} = ${fs(res.BD_DC)}`,CE_EA:`CE:EA = m(A):m(C) = ${m.A}:${m.C} = ${fs(res.CE_EA)}`}[a]}
+
+/* ===== 3. ЕСЕПТЕР (автор жасаған; жауаптар қозғалтқышпен есептеледі) ===== */
+const LV={easy:'Жеңіл',medium:'Орташа',hard:'Күрделі',olympiad:'Олимпиадалық'},XP={easy:10,medium:20,hard:35,olympiad:50};
+const T={a:'Медианалар',b:'Чевианалар және қиылысу нүктелері',c:'Чева теоремасы',d:'Аудандар',e:'Биссектрисалар',f:'Жанасу нүктелері',g:'Центр масс: дәлелдеу есептері (Прасолов, 14-тарау)'};
+const TRI='ABC үшбұрышында ';
+const P=(id,t,d,tp,s,g,ask,h)=>({id,t,d,tp,s,g,ask,h});
+const PROBLEMS=[
+ P('mp-001','Екі медиананың қиылысуы','easy',T.a,TRI+'D — BC қабырғасының, E — CA қабырғасының ортасы. AD және BE кесінділері P нүктесінде қиылысады. AP:PD қатынасын табыңыз.',{bd:[1,1],ce:[1,1]},'AP_PD',['Орта нүкте үшін екі ұшындағы массалар тең.','m(D) = m(B)+m(C).']),
+ P('mp-002','Екі чевиананың қиылысуы','medium',T.b,TRI+'D ∈ BC, E ∈ CA, BD:DC = 2:3, CE:EA = 1:2. AD және BE кесінділері P нүктесінде қиылысады. AP:PD қатынасын табыңыз.',{bd:[2,3],ce:[1,2]},'AP_PD',['BD:DC = 2:3 болса, m(B):m(C) = 3:2.','C төбесінің массасын екі шартқа ортақ етіп келтіріңіз.','AP:PD = m(D):m(A).']),
+ P('mp-003','Күрделірек қатынастар','hard',T.b,TRI+'D ∈ BC, E ∈ CA, BD:DC = 3:4, CE:EA = 5:2. AD және BE кесінділері P нүктесінде қиылысады. BP:PE қатынасын табыңыз.',{bd:[3,4],ce:[5,2]},'BP_PE',['m(B):m(C) = 4:3 және m(C):m(A) = 2:5.','m(C) үшін 3 пен 2-нің ортақ еселігін алыңыз.','BP:PE = m(E):m(B), m(E) = m(C)+m(A).']),
+ P('mp-004','Үш медиана','easy',T.a,TRI+'D, E, F — сәйкесінше BC, CA, AB қабырғаларының орталары. AD, BE, CF кесінділері P нүктесінде қиылысады. CP:PF қатынасын табыңыз.',{bd:[1,1],ce:[1,1],af:[1,1]},'CP_PF',['Үш төбеге бірдей масса қойыңыз.','m(F) = m(A)+m(B).']),
+ P('mp-005','Медиана мен чевиана','easy',T.b,TRI+'D — BC қабырғасының ортасы, F ∈ AB, AF:FB = 1:3. AD және CF кесінділері P нүктесінде қиылысады. CP:PF қатынасын табыңыз.',{bd:[1,1],af:[1,3]},'CP_PF',['m(B) = m(C).','AF:FB = 1:3 болса, m(A):m(B) = 3:1.']),
+ P('mp-006','Чева: белгісіз қатынас','medium',T.c,TRI+'D ∈ BC, E ∈ CA, F ∈ AB, AD, BE, CF бір нүктеде қиылысады. BD:DC = 2:1, CE:EA = 3:2. AF:FB қатынасын табыңыз.',{bd:[2,1],ce:[3,2]},'AF_FB',['Бір нүктеде қиылысатын чевиандар үшін массалар бар.','AF:FB = m(B):m(A).']),
+ P('mp-007','Чева: екінші белгісіз','medium',T.c,TRI+'D ∈ BC, E ∈ CA, F ∈ AB, AD, BE, CF бір нүктеде қиылысады. BD:DC = 1:2, AF:FB = 3:1. CE:EA қатынасын табыңыз.',{bd:[1,2],af:[3,1]},'CE_EA',['m(B):m(C) = 2:1 және m(A):m(B) = 1:3.','CE:EA = m(A):m(C).']),
+ P('mp-008','Центроид және аудан','easy',T.d,TRI+'D — BC, E — CA қабырғаларының орталары, AD және BE кесінділері P нүктесінде қиылысады. ABC үшбұрышының ауданы 60. APB үшбұрышының ауданын табыңыз.',{bd:[1,1],ce:[1,1]},{k:'area',t:'PAB',S:60},['P — үш бірдей массаның центрі.','[PAB]:[ABC] = m(C):(m(A)+m(B)+m(C)).']),
+ P('mp-009','Массалар және аудандар','medium',T.d,TRI+'D ∈ BC, E ∈ CA, BD:DC = 2:3, CE:EA = 1:2. AD және BE кесінділері P нүктесінде қиылысады. ABC ауданы 60. PBC үшбұрышының ауданын табыңыз.',{bd:[2,3],ce:[1,2]},{k:'area',t:'PBC',S:60},['Алдымен массаларды табыңыз.','[PBC]:[ABC] = m(A):(m(A)+m(B)+m(C)).']),
+ P('mp-010','Үш чевиан, аудан','hard',T.d,TRI+'D ∈ BC, E ∈ CA, F ∈ AB, BD:DC = 1:2, CE:EA = 2:3, AF:FB = 3:1. Бұл чевиандар P нүктесінде қиылысады (тексеріңіз!). ABC ауданы 110. PAB үшбұрышының ауданын табыңыз.',{bd:[1,2],ce:[2,3],af:[3,1]},{k:'area',t:'PAB',S:110},['Алдымен Чева шартын тексеріңіз.','m(A):m(B):m(C) табыңыз, [PAB] = S·m(C)/(m(A)+m(B)+m(C)).']),
+ P('mp-011','Қиылысудың күрделі қатынасы','hard',T.b,TRI+'D ∈ BC, E ∈ CA, BD:DC = 1:3, CE:EA = 1:4. AD және BE кесінділері P нүктесінде қиылысады. BP:PE қатынасын табыңыз.',{bd:[1,3],ce:[1,4]},'BP_PE',['m(B):m(C) = 3:1 және m(C):m(A) = 4:1.','m(C)=4 алыңыз.']),
+ P('mp-012','Ішкі сызылған шеңбердің центрі','medium',T.e,TRI+'AB = 13, BC = 14, CA = 15. AD және BE — биссектрисалар (D ∈ BC, E ∈ CA), олар I нүктесінде қиылысады. AI:ID қатынасын табыңыз.',{bd:[13,15],ce:[14,13]},'AP_PD',['Биссектриса қасиеті: BD:DC = AB:AC.','Массалар қабырғалардың ұзындығына пропорционал: m(A)=BC, m(B)=CA, m(C)=AB.']),
+ P('mp-013','Екінші биссектриса','medium',T.e,TRI+'AB = 13, BC = 14, CA = 15. AD және BE — биссектрисалар, I — қиылысу нүктесі. BI:IE қатынасын табыңыз.',{bd:[13,15],ce:[14,13]},'BP_PE',['Биссектриса қасиеті: CE:EA = BC:BA.','BI:IE = m(E):m(B).']),
+ P('mp-014','Үшінші чевиан','hard',T.c,TRI+'D ∈ BC, E ∈ CA, F ∈ AB. AD, BE, CF бір P нүктесінде қиылысады, BD:DC = 1:2, CE:EA = 2:1. CP:PF қатынасын табыңыз.',{bd:[1,2],ce:[2,1]},'CP_PF',['m(B):m(C) = 2:1 және m(C):m(A) = 1:2.','m(F) = m(A)+m(B).']),
+ P('mp-015','Жергон нүктесі','olympiad',T.f,TRI+'AB = 15, BC = 13, CA = 14. Ішкі сызылған шеңбер BC, CA, AB қабырғаларына сәйкесінше D, E, F нүктелерінде жанасады. AD, BE, CF чевианалары P нүктесінде қиылысады. AP:PD қатынасын табыңыз.',{bd:[7,6],ce:[6,8],af:[8,7]},'AP_PD',['Бір нүктеден жүргізілген жанама кесінділер тең. Жартылай периметр s = 21.','BD = s−CA, DC = s−AB және т.с.с.','Массалар (s−a)-ға кері пропорционал.'])
+];
+const ASKL={AP_PD:'AP:PD',BP_PE:'BP:PE',CP_PF:'CP:PF',AF_FB:'AF:FB',BD_DC:'BD:DC',CE_EA:'CE:EA'};
+const askName=a=>typeof a==='object'?`[${a.t}]`:ASKL[a];
+const askKey=a=>typeof a==='object'?a.k:a;
+
+/* ===== 4. ПРОГРЕСС ===== */
+const KEY='mpa.html.v1';let prog={xp:0,solved:{},attempts:0,correct:0,days:[]};
+try{Object.assign(prog,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(prog))}catch(e){}};
+const day=d=>d.toISOString().slice(0,10),$=id=>document.getElementById(id);
+function streak(){const S=new Set(prog.days);let n=0,d=new Date();if(!S.has(day(d)))d.setDate(d.getDate()-1);while(S.has(day(d))){n++;d.setDate(d.getDate()-1)}return n}
+function renderProg(){const lv=Math.floor(prog.xp/100)+1,into=prog.xp%100;
+ $('hLv').textContent=lv;$('hXp').textContent=prog.xp;$('hSt').textContent=streak();$('lvTxt').textContent=lv+'-деңгей';$('xpTxt').textContent=into+'/100 XP';$('xpBar').style.width=into+'%';
+ $('sSolved').textContent=Object.keys(prog.solved).length;$('sOk').textContent=prog.correct;$('att').textContent=prog.attempts;
+ $('acc').textContent=prog.attempts?Math.round(prog.correct/prog.attempts*100)+'%':'әлі жауап жоқ'}
+
+/* ===== 5. СЫЗБА ===== */
+const INIT={A:{x:400,y:70},B:{x:140,y:430},C:{x:680,y:430}};
+let tri=JSON.parse(JSON.stringify(INIT)),cur=1,res,hintN=0,stepN=0,showM=false,showR=true,drag=null,allSteps=[];
+const pos=(X,Y,a,b)=>({x:X.x+(Y.x-X.x)*a/(a+b),y:X.y+(Y.y-X.y)*a/(a+b)}),mid=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2});
+function draw(){
+ if(PROBLEMS[cur].poly)return drawPoly();
+ const pr=PROBLEMS[cur],g=pr.g||{},{A,B,C}=tri;let h='';
+ for(let x=0;x<=800;x+=40)h+=`<line x1="${x}" y1="0" x2="${x}" y2="520" stroke="#E5E7EB"/>`;
+ for(let y=0;y<=520;y+=40)h+=`<line x1="0" y1="${y}" x2="800" y2="${y}" stroke="#E5E7EB"/>`;
+ h+=`<polygon points="${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}" fill="rgba(79,125,243,.07)" stroke="#2563EB" stroke-width="3" stroke-linejoin="round"/>`;
+ const T=(p,t,c,dx,dy,sz=15)=>`<text x="${p.x+dx}" y="${p.y+dy}" fill="${c}" font-size="${sz}" font-weight="700" text-anchor="middle">${t}</text>`;
+ if(res.ok){const m=res.m,s=m.A+m.B+m.C,D=pos(B,C,m.C,m.B),E=pos(C,A,m.A,m.C),Fp=pos(A,B,m.B,m.A);
+  const showF=!!g.af||/CP_PF|AF_FB/.test(askKey(pr.ask));
+  const cv=[[A,D,'D',1,[B,D,C],g.bd,[0,22],res.mD,[0,44]],[B,E,'E',1,[C,E,A],g.ce,[22,0],res.mE,[34,22]],[C,Fp,'F',showF,[A,Fp,B],g.af,[-22,0],res.mF,[-34,22]]];
+  const pt={x:(m.A*A.x+m.B*B.x+m.C*C.x)/s,y:(m.A*A.y+m.B*B.y+m.C*C.y)/s};
+  if(typeof pr.ask==='object'&&pr.ask.t){const o=AO[pr.ask.t],q2=['A','B','C'].filter(k=>k!==o);
+   h+=`<polygon points="${pt.x},${pt.y} ${tri[q2[0]].x},${tri[q2[0]].y} ${tri[q2[1]].x},${tri[q2[1]].y}" fill="rgba(249,115,22,.18)" stroke="#F97316" stroke-width="1.5" stroke-dasharray="5 4"/>`}
+  for(const [V,Q,n,vis,[a,q,b],r,off,mm,moff] of cv){if(!vis)continue;
+   h+=`<line x1="${V.x}" y1="${V.y}" x2="${Q.x}" y2="${Q.y}" stroke="#6D28D9" stroke-width="2.5"/>`;
+   if(showR&&r)h+=T(mid(a,q),r[0],'#1E3A8A',off[0],off[1]+(off[1]?0:4))+T(mid(q,b),r[1],'#1E3A8A',off[0],off[1]+(off[1]?0:4));}
+  for(const [V,Q,n,vis,,,,mm,moff] of cv){if(!vis)continue;
+   h+=`<circle cx="${Q.x}" cy="${Q.y}" r="6" fill="#fff" stroke="#2563EB" stroke-width="2.5"/>`+T(Q,n,'#111',n==='D'?0:n==='E'?24:-24,n==='D'?26:4,17);
+   if(showM)h+=T(Q,'m='+mm,'#16A34A',moff[0],moff[1],14)}
+  h+=`<circle cx="${pt.x}" cy="${pt.y}" r="7" fill="#F97316" stroke="#fff" stroke-width="2"/>`+T(pt,'P','#F97316',14,-10,17);
+  if(showM)h+=T(A,'m='+m.A,'#16A34A',0,-38)+T(B,'m='+m.B,'#16A34A',-8,38)+T(C,'m='+m.C,'#16A34A',8,38)}
+ else{/* массалар анықталмаса да берілген қатынастар бойынша сызамыз */
+  const cv=[[A,B,C,'D',g.bd,[0,26]],[B,C,A,'E',g.ce,[24,4]],[C,A,B,'F',g.af,[-24,4]]];
+  for(const [V,X,Y,n,r,o] of cv){if(!r)continue;const Q=(r[0]>0&&r[1]>0)?pos(X,Y,r[0],r[1]):mid(X,Y);
+   h+=`<line x1="${V.x}" y1="${V.y}" x2="${Q.x}" y2="${Q.y}" stroke="#6D28D9" stroke-width="2.5"/><circle cx="${Q.x}" cy="${Q.y}" r="6" fill="#fff" stroke="#2563EB" stroke-width="2.5"/>`+T(Q,n,'#111',o[0],o[1],17);
+   if(showR)h+=T(mid(X,Q),r[0],'#1E3A8A',o[0]?o[0]:0,o[1]?o[1]-4:4)+T(mid(Q,Y),r[1],'#1E3A8A',o[0]?o[0]:0,o[1]?o[1]-4:4)}}
+ for(const k of['A','B','C']){const p=tri[k];
+  h+=`<circle data-k="${k}" cx="${p.x}" cy="${p.y}" r="24" fill="transparent" style="cursor:grab"/><circle cx="${p.x}" cy="${p.y}" r="9" fill="#DC2626" stroke="#fff" stroke-width="2.5" pointer-events="none"/><text x="${p.x+(k==='A'?0:k==='B'?-18:18)}" y="${p.y+(k==='A'?-16:6)}" font-size="19" font-weight="800" text-anchor="middle" pointer-events="none">${k}</text>`}
+ $('cv').innerHTML=h}
+const area=(a,b,c)=>Math.abs((b.x-a.x)*(c.y-a.y)-(c.x-a.x)*(b.y-a.y))/2;
+$('cv').addEventListener('pointerdown',e=>{const k=e.target.dataset&&e.target.dataset.k;if(k){drag=k;e.target.setPointerCapture(e.pointerId)}});
+$('cv').addEventListener('pointermove',e=>{if(!drag)return;const s=$('cv'),pt=s.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;const r=pt.matrixTransform(s.getScreenCTM().inverse());
+ const n={...tri,[drag]:{x:Math.min(780,Math.max(20,r.x)),y:Math.min(500,Math.max(20,r.y))}};if(PROBLEMS[cur].poly||area(n.A,n.B,n.C)>400){tri=n;draw()}});
+['pointerup','pointercancel'].forEach(t=>$('cv').addEventListener(t,()=>drag=null));
+
+/* ===== 6. ЕСЕП ЭКРАНЫ ===== */
+function renderAnalysis(){if(PROBLEMS[cur].poly){$('warn').innerHTML='';return}const g=PROBLEMS[cur].g||{};let h='';
+ if(g.bd)h+=`<div>BD:DC<b>${g.bd[0]}:${g.bd[1]}</b></div>`;if(g.ce)h+=`<div>CE:EA<b>${g.ce[0]}:${g.ce[1]}</b></div>`;if(g.af)h+=`<div>AF:FB<b>${g.af[0]}:${g.af[1]}</b></div>`;
+ if(res.ok)h+=`<div>Массалар<b>${res.m.A} : ${res.m.B} : ${res.m.C}</b></div><div>AP:PD<b>${fs(res.AP_PD)}</b></div><div>BP:PE<b>${fs(res.BP_PE)}</b></div><div>CP:PF<b>${fs(res.CP_PF)}</b></div>`;
+ $('an').innerHTML=h;$('warn').innerHTML=res.warn.map(w=>`<div class="warn">⚠ ${w}</div>`).join('')}
+function load(i){cur=i;const p=PROBLEMS[i];res=p.g?analyze(p.g):{ok:false,steps:[],warn:[]};allSteps=p.proof?p.sol:(res.ok?[...res.steps,askStep(res,askKey(p.ask)==='area'?p.ask:askKey(p.ask))]:res.steps);
+ tri=initPts();hintN=stepN=0;
+ $('pTitle').textContent=p.t;$('pTags').innerHTML=`<span>${LV[p.d]}</span><span>${p.tp}</span><span style="background:#f1f5f9;color:#475569">${p.src||'Автор жасаған жаттығу есебі'}</span>`;$('pText').textContent=p.s;
+ $('ask').textContent=askName(p.ask);$('ans').value='';{const pf=!!p.proof;$('ansRow').hidden=pf;$('ansH').hidden=pf;$('proofBox').hidden=!pf}$('fb').innerHTML=$('hints').innerHTML=$('steps').innerHTML='';renderAnalysis();draw();show('solve')}
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{const l=PROBLEMS.map((p,i)=>[p,i]).filter(x=>x[0].d===b.dataset.d);if(l.length)load(l[Math.floor(Math.random()*l.length)][1])});
+$('bRand').onclick=()=>load(Math.floor(Math.random()*PROBLEMS.length));
+const reset=()=>{tri=initPts();draw()};$('bReset').onclick=$('bReset2').onclick=reset;
+const tM=()=>{showM=!showM;$('tMass').classList.toggle('on',showM);draw()};$('tMass').onclick=$('bMass').onclick=tM;
+$('tRat').onclick=()=>{showR=!showR;$('tRat').classList.toggle('on',showR);draw()};
+$('bHint').onclick=()=>{const h=PROBLEMS[cur].h;hintN=Math.min(hintN+1,h.length);$('hints').innerHTML='<ol style="background:#fef9c3;border-radius:12px;padding:10px 10px 10px 30px;font-size:14px">'+h.slice(0,hintN).map(x=>`<li>${x}</li>`).join('')+'</ol>'};
+$('bStep').onclick=()=>{stepN=Math.min(stepN+1,allSteps.length);$('steps').innerHTML=allSteps.slice(0,stepN).map((s,i)=>`<div class="st"><b>${i+1}.</b> ${s}</div>`).join('')};
+$('bSave').onclick=()=>{const x=new XMLSerializer().serializeToString($('cv')),a=document.createElement('a');a.href=URL.createObjectURL(new Blob([x],{type:'image/svg+xml'}));a.download=PROBLEMS[cur].id+'.svg';a.click()};
+function check(){const p=PROBLEMS[cur],v=parseRatio($('ans').value);if(!v||!res.ok){$('fb').innerHTML='<div class="msg bad">Жауапты сан, бөлшек (14/15) немесе қатынас (14:15) түрінде жазыңыз.</div>';return}
+ const ok=eq(v,value(res,p.ask));prog.attempts++;if(ok)prog.correct++;const t=day(new Date());if(!prog.days.includes(t))prog.days.push(t);
+ if(ok&&!prog.solved[p.id]){prog.solved[p.id]=t;prog.xp+=XP[p.d]}save();renderProg();
+ $('fb').innerHTML=ok?'<div class="msg ok">Дұрыс! Эквивалентті жауаптар да қабылданады (мысалы, 10:2 = 5).</div>':'<div class="msg bad">Жауап дұрыс емес. «Кеңес алу» немесе «Шешімнің келесі қадамы» батырмасын қолданып көріңіз.</div>'}
+$('bCheck').onclick=check;$('ans').addEventListener('keydown',e=>{if(e.key==='Enter')check()});
+
+
+const PR=(id,n,t,d,s,o)=>({id,t,d,tp:T.g,s,proof:true,src:'В. В. Прасолов, «Задачи по планиметрии», № '+n+' (нөмірін пайдаланушы көрсетті, мен тексермедім)',...o});
+PROBLEMS.push(
+ PR('pr-14.4','14.4','Медианалардың қиылысуы','easy','ABC үшбұрышының медианалары бір нүктеде қиылысатынын және оны төбесінен санағанда 2:1 қатынасында бөлетінін дәлелдеңіз.',{g:{bd:[1,1],ce:[1,1],af:[1,1]},
+  h:['Үш төбеге де 1-ден масса қойыңыз.','Топтау теоремасын үш түрлі жұппен қолданыңыз.'],
+  sol:['A, B, C төбелеріне 1-ден масса қоямыз. Жүйенің центр массы G болсын.','B мен C нүктелерін топтаймыз: олардың центр массы D — BC ортасы, массасы 2. Топтау теоремасы бойынша G — A (масса 1) мен D (масса 2) нүктелерінің центр массы, сондықтан G ∈ AD және AG:GD = 2:1.','Дәл осылай C, A → E (CA ортасы) және A, B → F (AB ортасы) топтап, G ∈ BE, BG:GE = 2:1 және G ∈ CF, CG:GF = 2:1 аламыз.','Демек, үш медиана да бір G нүктесінен өтеді және әрқайсысын төбесінен санағанда 2:1 қатынасында бөледі. ∎']}),
+ PR('pr-14.5','14.5','Төртбұрыш: орталарды қосатын кесінділер','medium','ABCD — дөңес төртбұрыш, K, L, M, N — сәйкесінше AB, BC, CD, DA қабырғаларының орталары. KM және LN кесінділерінің қиылысу нүктесі осы кесінділердің әрқайсысының ортасы екенін, сондай-ақ диагональдар орталарын қосатын кесіндінің де ортасы екенін дәлелдеңіз.',
+  {poly:{id:'q45',keys:['A','B','C','D'],init:{A:{x:140,y:100},B:{x:640,y:80},C:{x:700,y:420},D:{x:100,y:440}}},
+  h:['Төрт төбеге де 1-ден масса қойыңыз.','Жұптап топтаңыз: (A,B) және (C,D).'],
+  sol:['A, B, C, D төбелеріне 1-ден масса қоямыз, центр массы O.','A, B → K (масса 2) және C, D → M (масса 2) топтаймыз. Массалары тең болғандықтан O — KM кесіндісінің ортасы.','Дәл осылай B, C → L және D, A → N топтап, O — LN кесіндісінің де ортасы екенін аламыз.','O нүктесі KM-де де, LN-де де жатады. KM мен LN — KLMN параллелограммының (Вариньон) диагональдары, олар бір түзуде жатпайды, сондықтан қиылысу нүктесі жалғыз: P = O.','Үшінші топтау: A, C → AC ортасы (масса 2), B, D → BD ортасы (масса 2). O — осы екі ортаны қосатын кесіндінің ортасы. ∎']}),
+ PR('pr-14.6','14.6','Алтыбұрыш: екі үшбұрыштың медианалары','medium','A₁, B₁, …, F₁ — ерікті алтыбұрыштың AB, BC, …, FA қабырғаларының орталары. A₁C₁E₁ және B₁D₁F₁ үшбұрыштарының медианаларының қиылысу нүктелері беттесетінін дәлелдеңіз.',
+  {poly:{id:'hex',keys:['A','B','C','D','E','F'],init:{A:{x:420,y:60},B:{x:680,y:190},C:{x:640,y:400},D:{x:380,y:470},E:{x:130,y:380},F:{x:120,y:150}}},
+  h:['Алты төбеге де 1-ден масса қойыңыз.','Бір рет (AB, CD, EF), екінші рет (BC, DE, FA) топтаңыз.'],
+  sol:['Алтыбұрыштың A, B, C, D, E, F төбелеріне 1-ден масса қоямыз; центр массы O.','A, B → A₁, C, D → C₁, E, F → E₁ топтаймыз. Үш нүктенің әрқайсысының массасы 2. Топтау теоремасы бойынша O — массалары тең A₁, C₁, E₁ нүктелерінің центр массы.','Массалары тең үш нүктенің центр массы — үшбұрыштың медианаларының қиылысу нүктесі (14.4). Демек, O — A₁C₁E₁ үшбұрышының медианалар қиылысу нүктесі.','Дәл осылай B, C → B₁, D, E → D₁, F, A → F₁ топтап, O — B₁D₁F₁ үшбұрышының да медианалар қиылысу нүктесі екенін аламыз. Екеуі де O болғандықтан, олар беттеседі. ∎']}),
+ PR('pr-14.7','14.7','Чева теоремасы (топтау арқылы)','hard','Чева теоремасын массаларды топтау арқылы дәлелдеңіз: ABC үшбұрышында D ∈ BC, E ∈ CA, F ∈ AB болса, AD, BE, CF бір нүктеде қиылысады ⇔ (BD/DC)·(CE/EA)·(AF/FB) = 1.',{g:{bd:[2,1],ce:[3,2],af:[1,3]},
+  h:['m(B) = DC, m(C) = BD деп алыңыз.','m(A)-ны E нүктесі C мен A-ның центр массы болатындай таңдаңыз.'],
+  sol:['Белгілеу: BD/DC = α, CE/EA = β, AF/FB = γ.','Қажеттілік. AD, BE, CF чевиандары P нүктесінде қиылысады дейік. m(B) = DC, m(C) = BD, m(A) = BD·β деп аламыз. Сонда D — B мен C-ның центр массы (m(B)·BD = m(C)·DC), ал E — C мен A-ның центр массы (m(C)·CE = BD·CE = m(A)·EA).','Топтау бойынша жүйенің центр массы O ∈ AD (B, C → D) және O ∈ BE (C, A → E). AD ∩ BE = P, сондықтан O = P.','A, B → F′ (AF′:F′B = m(B):m(A)) топтасақ, O ∈ CF′. C, P, F бір түзуде жатады, ал CP түзуі AB-ны бір нүктеде қияды, сондықтан F′ = F және γ = AF/FB = m(B)/m(A) = DC/(BD·β) = 1/(αβ), яғни αβγ = 1.','Жеткіліктілік. αβγ = 1 болсын. Жоғарыдағыдай массалар алып, F′ нүктесін AF′:F′B = m(B):m(A) = 1/(αβ) = γ деп алсақ, F′ = F. Центр масс AD, BE, CF-тің үшеуінде де жатады, демек олар бір нүктеде қиылысады. ∎']}),
+ PR('pr-14.8','14.8*','Төртбұрыштағы қатынастар','olympiad','Дөңес ABCD төртбұрышының AB, BC, CD, DA қабырғаларынан сәйкесінше K, L, M, N нүктелері алынған, AK:KB = DM:MC = a және BL:LC = AN:ND = b. P — KM мен LN кесінділерінің қиылысу нүктесі. NP:PL = a және KP:PM = b екенін дәлелдеңіз. (Сызбада a = 2, b = 3.)',
+  {poly:{id:'q48',keys:['A','B','C','D'],init:{A:{x:140,y:100},B:{x:640,y:80},C:{x:700,y:420},D:{x:100,y:440}}},
+  h:['m(A) = 1, m(B) = a деп бастаңыз.','m(D) = b, m(C) = ab.'],
+  sol:['Массаларды таңдаймыз: m(A) = 1, m(B) = a, m(D) = b, m(C) = ab.','Тексереміз: K — A, B-ның центр массы (1·AK = a·KB ⇒ AK:KB = a); M — D, C-ның центр массы (b·DM = ab·MC ⇒ DM:MC = a); L — B, C-ның центр массы (a·BL = ab·LC ⇒ BL:LC = b); N — A, D-ның центр массы (1·AN = b·ND ⇒ AN:ND = b).','Топталған массалар: m(K) = 1+a, m(M) = b+ab = b(1+a), m(L) = a+ab = a(1+b), m(N) = 1+b.','Жүйенің центр массы O. (A,B → K) және (D,C → M) топтау бойынша O ∈ KM, KO:OM = m(M):m(K) = b(1+a):(1+a) = b. (B,C → L) және (A,D → N) топтау бойынша O ∈ LN, NO:OL = m(L):m(N) = a(1+b):(1+b) = a.','O — KM мен LN-нің ортақ нүктесі, ал екі түзудің ортақ нүктесі жалғыз, сондықтан O = P. Демек NP:PL = a және KP:PM = b. ∎']}),
+ PR('pr-14.9','14.9*','Түзу арқылы шарт беретін нүкте','olympiad','ABC үшбұрышының ішінен мына қасиеті бар O нүктесін табыңыз: O арқылы өтетін және AB қабырғасын K нүктесінде, BC қабырғасын L нүктесінде қиятын кез келген түзу үшін p·AK/KB + q·CL/LB = 1 теңдігі орындалады, мұндағы p және q — берілген оң сандар.',
+  {poly:{id:'tri9',keys:['A','B','C'],init:INIT},h:['O — A, B, C-дағы p, 1, q массаларының центр массы деп болжаңыз.','K = (A + uB)/(1+u), мұнда u = AK/KB.'],
+  sol:['A, B, C нүктелеріне сәйкесінше p, 1, q массаларын қоямыз; центр массы O. Осы нүкте ізделген екенін көрсетеміз. s = p + 1 + q.','O арқылы өтетін түзу AB мен BC-ны K, L нүктелерінде қисын. u = AK/KB, v = CL/LB. Сонда K = (A + uB)/(1+u), L = (C + vB)/(1+v).','O нүктесі KL түзуінде жатады: O = λK + (1−λ)L. Барицентрлік координаталардың жалғыздығынан A үшін λ/(1+u) = p/s, C үшін (1−λ)/(1+v) = q/s.','Сонда λ = p(1+u)/s, 1−λ = q(1+v)/s. Қосып, s = p(1+u) + q(1+v) = p + q + pu + qv аламыз. s = p + q + 1 болғандықтан pu + qv = 1, яғни p·AK/KB + q·CL/LB = 1. ∎','Жауабы: O — A, B, C төбелеріндегі p, 1, q массаларының центр массы.']}),
+ PR('pr-14.10','14.10*','Үш шыбын','olympiad','Массалары тең үш шыбын үшбұрыштың қабырғалары бойымен олардың центр массы орнында қалатындай етіп жорғалап жүр. Егер бір шыбын үшбұрыштың бүкіл периметрін толық аралап шыққаны белгілі болса, центр масс ABC үшбұрышының медианаларының қиылысу нүктесімен беттесетінін дәлелдеңіз.',
+  {poly:{id:'tri10',keys:['A','B','C'],init:INIT},h:['Барицентрлік координаталарды (α, β, γ) қараңыз: олар сызықтық.','Шыбын A төбесінде тұрғанда α = 1.'],
+  sol:['Массалар тең, сондықтан центр масс — шыбындардың X, Y, Z орындарының арифметикалық ортасы: O = (X+Y+Z)/3. O қозғалмайды.','Нүктенің барицентрлік координаталарын (α, β, γ) деп белгілейміз (α+β+γ = 1). Олар нүктенің сызықтық функциялары, сондықтан α(X)+α(Y)+α(Z) = 3α(O); β, γ үшін де солай. Шекарадағы нүктелердің барлық координаталары теріс емес.','Бірінші шыбын A төбесінде тұрған сәтте α(X) = 1, ал α(Y), α(Z) ≥ 0. Сондықтан 3α(O) ≥ 1, яғни α(O) ≥ 1/3.','Бұл шыбын бүкіл шекараны аралағандықтан B және C төбелерінде де болады: β(O) ≥ 1/3, γ(O) ≥ 1/3.','α(O)+β(O)+γ(O) = 1 болғандықтан үш теңсіздік те теңдікке айналады: α = β = γ = 1/3. Яғни O — ABC үшбұрышының медианаларының қиылысу нүктесі. ∎']}),
+ PR('pr-14.11','14.11*','Чевианалардағы қатынастар','olympiad','ABC үшбұрышының AB, BC, CA қабырғаларынан C₁, A₁, B₁ нүктелері CC₁, AA₁, BB₁ түзулері қандай да бір O нүктесінде қиылысатындай етіп алынған. Дәлелдеңіз: а) CO/OC₁ = CA₁/A₁B + CB₁/B₁A; б) (AO/OA₁)·(BO/OB₁)·(CO/OC₁) = AO/OA₁ + BO/OB₁ + CO/OC₁ + 2 ≥ 8.',{g:{bd:[1,2],ce:[2,3],af:[3,1]},
+  h:['14.7-дегідей A, B, C-ға a, b, c массаларын қойыңыз.','б) үшін екі жақты да a, b, c арқылы жазыңыз.'],
+  sol:['14.7-дегідей A, B, C төбелеріне a, b, c оң массаларын қоямыз, сонда O — олардың центр массы, ал A₁, B₁, C₁ — сәйкесінше (B,C), (C,A), (A,B) жұптарының центр массы. Демек m(A₁) = b+c, m(B₁) = c+a, m(C₁) = a+b.','Рычаг ережесі: CA₁/A₁B = b/c, CB₁/B₁A = a/c, CO/OC₁ = m(C₁)/m(C) = (a+b)/c.','а) CO/OC₁ = (a+b)/c = b/c + a/c = CA₁/A₁B + CB₁/B₁A. ∎','б) Дәл осылай AO/OA₁ = (b+c)/a, BO/OB₁ = (c+a)/b. Оларды x, y, z деп белгілейміз. xyz = (a+b)(b+c)(c+a)/(abc) = (a²b + a²c + b²a + b²c + c²a + c²b + 2abc)/(abc).','x+y+z = (b+c)/a + (c+a)/b + (a+b)/c = (a²b + a²c + b²a + b²c + c²a + c²b)/(abc). Сондықтан xyz = x+y+z+2.','a+b ≥ 2√(ab), b+c ≥ 2√(bc), c+a ≥ 2√(ca) теңсіздіктерін көбейтіп, (a+b)(b+c)(c+a) ≥ 8abc, яғни xyz ≥ 8 аламыз. ∎']}),
+ PR('pr-14.12','14.12*','Екі үшбұрыштың центр массы','olympiad','ABC үшбұрышының BC, CA, AB қабырғаларынан A₁, B₁, C₁ нүктелері BA₁/A₁C = CB₁/B₁A = AC₁/C₁B болатындай етіп алынған. ABC және A₁B₁C₁ үшбұрыштарының центр массалары беттесетінін дәлелдеңіз.',
+  {poly:{id:'tri12',keys:['A','B','C'],init:INIT},h:['k — ортақ қатынас. A₁ — B (1) мен C (k) нүктелерінің центр массы.'],
+  sol:['k = BA₁/A₁C = CB₁/B₁A = AC₁/C₁B. A₁ — B (масса 1) және C (масса k) нүктелерінің центр массы (BA₁:A₁C = k:1), массасы 1+k. Сол сияқты B₁ — C (1) мен A (k), C₁ — A (1) мен B (k) нүктелерінің центр массы; әрқайсысының массасы 1+k.','A₁, B₁, C₁ нүктелеріне 1+k-ден масса қойсақ, бұл массаларды төбелерге таратқанмен тең: A-да k+1, B-да 1+k, C-да k+1, яғни A, B, C-да тең массалар.','Топтау теоремасы бойынша тең массалы A₁, B₁, C₁ жүйесінің центр массы тең массалы A, B, C жүйесінің центр массымен беттеседі. Яғни екі үшбұрыштың да медианаларының қиылысу нүктесі ортақ. ∎']}),
+ PR('pr-14.13','14.13*','Орталардағы массалар','olympiad','ABC үшбұрышы қабырғаларының орталарына массалары сәйкес қабырғалардың ұзындығына тең нүктелер орналастырылған (BC ортасында BC-ға тең масса, т.с.с.). Осы жүйенің центр массы төбелері ABC үшбұрышы қабырғаларының орталарында жатқан үшбұрыштың іштей сызылған шеңбер центрінде жататынын дәлелдеңіз.',
+  {poly:{id:'tri13',keys:['A','B','C'],init:INIT},h:['Орта сызық қабырғаның жартысына тең.','Теориядағы 7-тармақты қараңыз.'],
+  sol:['a = BC, b = CA, c = AB; A′, B′, C′ — BC, CA, AB қабырғаларының орталары. Массалар: A′-та a, B′-та b, C′-та c.','A′B′C′ үшбұрышының қабырғалары орта сызықтар: B′C′ = a/2, C′A′ = b/2, A′B′ = c/2. Яғни A′, B′, C′ төбелеріне қарсы жатқан қабырғалар сәйкесінше a/2, b/2, c/2.','Сонда A′, B′, C′ төбелеріндегі массалар қарсы жатқан қабырғаларға пропорционал (коэффициент 2). Теориядағы 7-тармақ бойынша мұндай массалардың центр массы — A′B′C′ үшбұрышына іштей сызылған шеңбердің центрі. ∎']})
+);
+/*DER*/
+const dst=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),mid2=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2}),wp=(a,b,t)=>({x:a.x+(b.x-a.x)*t,y:a.y+(b.y-a.y)*t});
+const cen=(...p)=>({x:p.reduce((s,q)=>s+q.x,0)/p.length,y:p.reduce((s,q)=>s+q.y,0)/p.length});
+function lin(a,b,c,d){const den=(a.x-b.x)*(c.y-d.y)-(a.y-b.y)*(c.x-d.x);if(Math.abs(den)<1e-9)return null;const t=((a.x-c.x)*(c.y-d.y)-(a.y-c.y)*(c.x-d.x))/den;return{x:a.x+t*(b.x-a.x),y:a.y+t*(b.y-a.y)}}
+const DER={
+ q45(V){const K=mid2(V.A,V.B),L=mid2(V.B,V.C),M=mid2(V.C,V.D),N=mid2(V.D,V.A),P=lin(K,M,L,N)||K,Q=mid2(mid2(V.A,V.C),mid2(V.B,V.D));
+  return{L:[[K,M,'#6D28D9'],[L,N,'#6D28D9'],[K,L,'#94a3b8',1],[L,M,'#94a3b8',1],[M,N,'#94a3b8',1],[N,K,'#94a3b8',1]],Pt:[[K,'K'],[L,'L'],[M,'M'],[N,'N'],[P,'P','#F97316'],[Q,'Q','#16A34A']],
+  info:['Тексеру (px): |P − орта(KM)| = '+dst(P,mid2(K,M)).toFixed(4),'|P − орта(LN)| = '+dst(P,mid2(L,N)).toFixed(4),'Q — диагональ орталарын қосатын кесінді ортасы: |P − Q| = '+dst(P,Q).toFixed(4)],
+  M:[[V.A,'m=1'],[V.B,'m=1'],[V.C,'m=1'],[V.D,'m=1'],[K,'m=2'],[L,'m=2'],[M,'m=2'],[N,'m=2']]}},
+ hex(V){const k='ABCDEF',m=k.split('').map((c,i)=>mid2(V[c],V[k[(i+1)%6]])),G1=cen(m[0],m[2],m[4]),G2=cen(m[1],m[3],m[5]);
+  return{L:[[m[0],m[2],'#6D28D9'],[m[2],m[4],'#6D28D9'],[m[4],m[0],'#6D28D9'],[m[1],m[3],'#DB4BA7'],[m[3],m[5],'#DB4BA7'],[m[5],m[1],'#DB4BA7']],
+  Pt:m.map((p,i)=>[p,'ABCDEF'[i]+'₁']).concat([[G1,'G','#F97316']]),
+  info:['A₁C₁E₁ медианалар қиылысуы мен B₁D₁F₁ медианалар қиылысуының арақашықтығы (px): '+dst(G1,G2).toFixed(4)],
+  M:k.split('').map(c=>[V[c],'m=1']).concat(m.map(p=>[p,'m=2']))}},
+ q48(V){const a=2,b=3,K=wp(V.A,V.B,a/(1+a)),M=wp(V.D,V.C,a/(1+a)),L=wp(V.B,V.C,b/(1+b)),N=wp(V.A,V.D,b/(1+b)),P=lin(K,M,N,L)||K;
+  return{L:[[K,M,'#6D28D9'],[N,L,'#6D28D9']],Pt:[[K,'K'],[L,'L'],[M,'M'],[N,'N'],[P,'P','#F97316']],
+  info:['NP:PL = '+(dst(N,P)/dst(P,L)).toFixed(4)+'  (a = '+a+')','KP:PM = '+(dst(K,P)/dst(P,M)).toFixed(4)+'  (b = '+b+')'],
+  M:[[V.A,'m=1'],[V.B,'m='+a],[V.C,'m='+a*b],[V.D,'m='+b],[K,'m='+(1+a)],[M,'m='+b*(1+a)],[L,'m='+a*(1+b)],[N,'m='+(1+b)]]}},
+ tri9(V){const p=2,q=3,s=p+1+q,O={x:(p*V.A.x+V.B.x+q*V.C.x)/s,y:(p*V.A.y+V.B.y+q*V.C.y)/s},L=[],Pt=[[O,'O','#F97316']],info=['Сызбада p = '+p+', q = '+q+'; O = (p·A + 1·B + q·C)/(p+1+q).'];
+  [[0.15,'K','L','#6D28D9'],[0.4,'K₂','L₂','#DB4BA7']].forEach(([u,nk,nl,c])=>{const K=wp(V.A,V.B,u/(1+u)),Lp=lin(K,O,V.B,V.C);if(!Lp)return;
+   L.push([K,Lp,c]);Pt.push([K,nk],[Lp,nl]);const v=dst(V.C,Lp)/dst(Lp,V.B);info.push(nk+nl+' түзуі: p·AK/KB + q·CL/LB = '+(p*u+q*v).toFixed(4))});
+  return{L,Pt,info,M:[[V.A,'m='+p],[V.B,'m=1'],[V.C,'m='+q]]}},
+ tri10(V){const G=cen(V.A,V.B,V.C),X=V.A,Y=wp(V.B,V.C,0.3),Z=wp(V.B,V.C,0.7),O=cen(X,Y,Z);
+  return{L:[[G,X,'#DB4BA7',1],[G,Y,'#DB4BA7',1],[G,Z,'#DB4BA7',1],[V.A,mid2(V.B,V.C),'#94a3b8',1],[V.B,mid2(V.C,V.A),'#94a3b8',1],[V.C,mid2(V.A,V.B),'#94a3b8',1]],
+  Pt:[[Y,'Y'],[Z,'Z'],[G,'G','#F97316']],
+  info:['X шыбыны A төбесінде, Y мен Z — BC бойында.','Шыбындардың центр массы (X+Y+Z)/3 мен медианалар қиылысуы G арақашықтығы (px): '+dst(O,G).toFixed(4)],
+  M:[[X,'X, m=1'],[Y,'m=1'],[Z,'m=1']]}},
+ tri12(V){const k=2,t=k/(1+k),A1=wp(V.B,V.C,t),B1=wp(V.C,V.A,t),C1=wp(V.A,V.B,t),G=cen(V.A,V.B,V.C),G1=cen(A1,B1,C1);
+  return{L:[[A1,B1,'#6D28D9'],[B1,C1,'#6D28D9'],[C1,A1,'#6D28D9'],[V.A,mid2(V.B,V.C),'#94a3b8',1],[V.B,mid2(V.C,V.A),'#94a3b8',1],[V.C,mid2(V.A,V.B),'#94a3b8',1],[A1,mid2(B1,C1),'#DB4BA7',1],[B1,mid2(C1,A1),'#DB4BA7',1],[C1,mid2(A1,B1),'#DB4BA7',1]],
+  Pt:[[A1,'A₁'],[B1,'B₁'],[C1,'C₁'],[G,'G','#F97316']],
+  info:['Сызбада k = BA₁/A₁C = CB₁/B₁A = AC₁/C₁B = '+k,'ABC және A₁B₁C₁ медианалар қиылысуларының арақашықтығы (px): '+dst(G,G1).toFixed(4)],
+  M:[[V.A,'m=1'],[V.B,'m=1'],[V.C,'m=1'],[A1,'m='+(1+k)],[B1,'m='+(1+k)],[C1,'m='+(1+k)]]}},
+ tri13(V){const a=dst(V.B,V.C),b=dst(V.C,V.A),c=dst(V.A,V.B),A1=mid2(V.B,V.C),B1=mid2(V.C,V.A),C1=mid2(V.A,V.B),s=a+b+c,
+  O={x:(a*A1.x+b*B1.x+c*C1.x)/s,y:(a*A1.y+b*B1.y+c*C1.y)/s},r=area(A1,B1,C1)*2/(s/2);
+  return{L:[[A1,B1,'#6D28D9'],[B1,C1,'#6D28D9'],[C1,A1,'#6D28D9']],C:[[O,r,'#16A34A']],
+  Pt:[[A1,'A′'],[B1,'B′'],[C1,'C′'],[O,'O','#F97316']],
+  info:['Жасыл шеңбер — A′B′C′ үшбұрышына іштей сызылған шеңбер.','Центр масс пен іштей сызылған шеңбер центрінің арақашықтығы (px): '+(()=>{const la=dst(B1,C1),lb=dst(C1,A1),lc=dst(A1,B1),pp=la+lb+lc;return dst(O,{x:(la*A1.x+lb*B1.x+lc*C1.x)/pp,y:(la*A1.y+lb*B1.y+lc*C1.y)/pp})})().toFixed(4)],
+  M:[[A1,'m=BC'],[B1,'m=CA'],[C1,'m=AB']]}}};
+/*END*/
+function initPts(){const p=PROBLEMS[cur];return JSON.parse(JSON.stringify(p&&p.poly?p.poly.init:INIT))}
+function drawPoly(){const pr=PROBLEMS[cur],V=tri,ks=pr.poly.keys,d=DER[pr.poly.id](V),c0=cen(...ks.map(k=>V[k]));let h='';
+ for(let x=0;x<=800;x+=40)h+=`<line x1="${x}" y1="0" x2="${x}" y2="520" stroke="#E5E7EB"/>`;
+ for(let y=0;y<=520;y+=40)h+=`<line x1="0" y1="${y}" x2="800" y2="${y}" stroke="#E5E7EB"/>`;
+ h+=`<polygon points="${ks.map(k=>V[k].x+','+V[k].y).join(' ')}" fill="rgba(79,125,243,.07)" stroke="#2563EB" stroke-width="3" stroke-linejoin="round"/>`;
+ (d.C||[]).forEach(([o,r,c])=>h+=`<circle cx="${o.x}" cy="${o.y}" r="${r}" fill="none" stroke="${c}" stroke-width="2.5"/>`);
+ d.L.forEach(([p,q,c,da])=>h+=`<line x1="${p.x}" y1="${p.y}" x2="${q.x}" y2="${q.y}" stroke="${c}" stroke-width="2.5"${da?' stroke-dasharray="6 5"':''}/>`);
+ d.Pt.forEach(([p,n,c])=>h+=`<circle cx="${p.x}" cy="${p.y}" r="${c?7:5}" fill="${c||'#fff'}" stroke="${c?'#fff':'#2563EB'}" stroke-width="2.5"/><text x="${p.x+12}" y="${p.y-8}" font-size="15" font-weight="700" fill="${c||'#111'}">${n}</text>`);
+ if(showM&&d.M)d.M.forEach(([p,t])=>{const L=Math.hypot(p.x-c0.x,p.y-c0.y)||1,ux=(p.x-c0.x)/L,uy=(p.y-c0.y)/L,isV=ks.some(k=>V[k]===p),tx=Math.min(760,Math.max(40,isV?p.x+ux*62:p.x)),ty=Math.min(512,Math.max(16,isV?p.y+uy*62+5:p.y+24));
+  h+=`<text x="${tx}" y="${ty}" fill="#16A34A" font-size="14" font-weight="700" text-anchor="middle">${t}</text>`});
+ ks.forEach(k=>{const p=V[k],L=Math.hypot(p.x-c0.x,p.y-c0.y)||1;
+  h+=`<circle data-k="${k}" cx="${p.x}" cy="${p.y}" r="24" fill="transparent" style="cursor:grab"/><circle cx="${p.x}" cy="${p.y}" r="9" fill="#DC2626" stroke="#fff" stroke-width="2.5" pointer-events="none"/><text x="${p.x+(p.x-c0.x)/L*24}" y="${p.y+(p.y-c0.y)/L*24+6}" font-size="19" font-weight="800" text-anchor="middle" pointer-events="none">${k}</text>`});
+ $('cv').innerHTML=h;$('an').innerHTML=d.info.map(i=>`<div>${i}</div>`).join('')}
+$('bSelf').onclick=()=>{const p=PROBLEMS[cur];if(!p.proof)return;const t=day(new Date());if(!prog.days.includes(t))prog.days.push(t);
+ let msg='Өзін-өзі бағалау белгіленді.';if(!prog.solved[p.id]){prog.solved[p.id]=t;prog.xp+=XP[p.d];msg+=' +'+XP[p.d]+' XP.'}
+ save();renderProg();$('fb').innerHTML='<div class="msg ok">'+msg+'</div>'};
+
+/* ===== 7. ЕСЕПТЕР ЖИНАҒЫ ===== */
+function renderLib(){const d=$('fD').value,t=$('fT').value,s=$('fS').value;
+ $('list').innerHTML=PROBLEMS.map((p,i)=>({p,i})).filter(({p})=>(!d||p.d===d)&&(!t||p.tp===t)&&(!s||(s==='1')===!!prog.solved[p.id]))
+  .map(({p,i})=>`<div class="pc"><div><b>${prog.solved[p.id]?'✅ ':''}${p.id} · ${p.t}</b><div class="tags" style="margin-top:4px"><span>${LV[p.d]}</span><span>${p.tp}</span><span>${XP[p.d]} XP</span></div></div><button data-o="${i}">Ашу</button></div>`).join('')||'<p>Сүзгіге сәйкес есеп жоқ.</p>'}
+$('fD').innerHTML='<option value="">Барлық деңгей</option>'+Object.entries(LV).map(([k,v])=>`<option value="${k}">${v} (${PROBLEMS.filter(p=>p.d===k).length})</option>`).join('');
+$('fT').innerHTML='<option value="">Барлық тақырып</option>'+Object.values(T).map(v=>`<option>${v}</option>`).join('');
+['fD','fT','fS'].forEach(id=>$(id).onchange=renderLib);
+$('list').onclick=e=>{if(e.target.dataset.o!==undefined)load(+e.target.dataset.o)};
+
+/* ===== 8. ТЕОРИЯ ===== */
+const q=(a,b)=>`<span class="f"><i>${a}</i><i>${b}</i></span>`;
+$('vTheory').innerHTML=`<div class="card"><h2 style="margin-top:0">Центр масс туралы негізгі теоремалар</h2>
+<small>Әр теорема қысқа дәлелдеумен берілген. Қосымша оқу үшін: В. В. Прасолов, «Задачи по планиметрии» кітабындағы «Центр масс» тарауы.</small></div>
+<div class="card"><h3>1. Анықтама</h3><p>Массалары m₁, …, mₙ болатын A₁, …, Aₙ нүктелер жүйесінің <b>центр массы</b> — мына нүкте:</p>
+<div class="fm">X = (m₁A₁ + … + mₙAₙ) / (m₁ + … + mₙ)</div><p>Массалар оң болса, X нүктесі нүктелердің дөңес қабығының ішінде жатады.</p></div>
+<div class="card"><h3>2. Рычаг ережесі (екі нүкте)</h3><p>A мен B нүктелерінің массалары m₁, m₂ болса, центр масс X кесіндінің ішінде жатады:</p>
+<div class="fm">m₁ · AX = m₂ · XB &nbsp;⇔&nbsp; AX : XB = m₂ : m₁</div><p><i>Дәлелдеу:</i> X = (m₁A + m₂B)/(m₁+m₂) формуласынан X − A = ${q('m₂','m₁+m₂')}(B − A), ал B − X = ${q('m₁','m₁+m₂')}(B − A).</p>
+<p><small>Mass Points-тағы негізгі ереже: D ∈ BC болса, m(B)·BD = m(C)·DC.</small></p></div>
+<div class="card"><h3>3. Топтау теоремасы</h3><p>Жүйенің центр массын табу үшін нүктелерді бірнеше топқа бөліп, әр топтың массасын оның центр массына орналастыруға болады. Нәтиже бөлуге тәуелді емес.</p>
+<p><i>Дәлелдеу:</i> центр масс формуласындағы қосындыны кез келген тәртіппен топтауға болады, өйткені ол сызықтық. Осы себепті D нүктесіне m(B)+m(C) массасын қойып, AD кесіндісінде рычагты қолданамыз: AP:PD = m(D):m(A).</p></div>
+<div class="card"><h3>4. Үшбұрыштың медианалары</h3><p>Үш төбеге бірдей масса қойсақ, центр масс — медианалардың қиылысу нүктесі, ол әр медиананы төбеден санағанда 2:1 қатынасында бөледі.</p>
+<p><i>Дәлелдеу:</i> m(A)=m(B)=m(C)=1. D — BC ортасы, m(D)=2. AP:PD = m(D):m(A) = 2:1.</p></div>
+<div class="card"><h3>5. Чева теоремасы (массалар тілінде)</h3><p>ABC үшбұрышында D ∈ BC, E ∈ CA, F ∈ AB. AD, BE, CF бір нүктеде қиылысады ⇔</p>
+<div class="fm">${q('BD','DC')} · ${q('CE','EA')} · ${q('AF','FB')} = 1</div>
+<p><i>Дәлелдеу (⇒):</i> қиылысу нүктесі P болсын. Массаларды m(A), m(B), m(C) деп алсақ, BD:DC = m(C):m(B), CE:EA = m(A):m(C), AF:FB = m(B):m(A). Көбейтіндісі 1. <i>(⇐):</i> көбейтінді 1 болса, алғашқы екі чевиананың қиылысу нүктесі арқылы үшіншісі де өтеді, себебі F нүктесінің орны бір мәнді анықталады.</p>
+<p><small>Үш чевиан берілгенде қатынастар Чева шартына қайшы келсе, бағдарлама қайшылық туралы хабар береді.</small></p></div>
+<div class="card"><h3>6. Массалар және аудандар</h3><p>P — A, B, C төбелеріндегі m(A), m(B), m(C) массаларының центр массы болса:</p>
+<div class="fm">S(PBC) : S(PCA) : S(PAB) = m(A) : m(B) : m(C)</div>
+<p><i>Дәлелдеу:</i> P-дан BC-ға дейінгі қашықтық m(A)/(m(A)+m(B)+m(C)) · (A-дан BC-ға дейінгі қашықтық) болады, себебі центр массының BC-ға қатысты «биіктігі» массалармен өлшенген орташа биіктік. Сондықтан S(PBC) = S(ABC) · m(A)/(m(A)+m(B)+m(C)).</p></div>
+<div class="card"><h3>7. Биссектрисалар және ішкі сызылған шеңбердің центрі</h3><p>AB = c, BC = a, CA = b болсын. Биссектриса қасиеті бойынша BD:DC = c:b. Массалар m(A)=a, m(B)=b, m(C)=c болса, центр масс — ішкі сызылған шеңбердің центрі I:</p>
+<div class="fm">AI : ID = (b + c) : a</div></div>
+<div class="card"><h3>8. Төртбұрыш</h3><p>Төртбұрыштың төрт төбесіне бірдей масса қойсақ, центр масс қарама-қарсы қабырғалар орталарын қосатын екі кесіндінің де ортасы болады. Яғни олар қиылысып, қиылысу нүктесінде тең екіге бөлінеді (Вариньон параллелограмы).</p></div>
+<div class="card"><h3>Әдістің шегі</h3><p>Оң массалар тек нүкте қабырғаның <b>ішінде</b> жатқанда жұмыс істейді. Нүкте қабырғаның созындысында жатса, теріс (таңбалы) массалар немесе басқа әдіс қажет. Тізбектелген қатынастар Чева шартына қайшы келсе, чевиандар бір нүктеде қиылыспайды.</p></div>`;
+
+/* ===== 9. НАВИГАЦИЯ ===== */
+function show(v){['solve','theory','lib'].forEach(k=>{$('v'+k[0].toUpperCase()+k.slice(1)).hidden=k!==v});
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));if(v==='lib')renderLib();scrollTo(0,0)}
+document.querySelector('nav').onclick=e=>{if(e.target.dataset.v)show(e.target.dataset.v)};
+renderProg();load(1);
+</script>
+<script>if("serviceWorker" in navigator && location.protocol === "https:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}</script>
+</body>
+</html>
